@@ -18,7 +18,7 @@ namespace BlazorExtensions.Http
         /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public static async Task<T> MyGetJsonAsync<T>(this HttpClient httpClient, string requestUri)
+        public static async Task<T> GetJsonAsync<T>(this HttpClient httpClient, string requestUri)
         {
             var responseJson = await httpClient.GetStringAsync(requestUri);
             return JsonUtil.Deserialize<T>(responseJson);
@@ -33,7 +33,7 @@ namespace BlazorExtensions.Http
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public static Task MyPostJsonAsync(this HttpClient httpClient, string requestUri, object content)
+        public static Task PostJsonAsync(this HttpClient httpClient, string requestUri, object content)
             => httpClient.SendJsonAsync(HttpMethod.Post, requestUri, content);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace BlazorExtensions.Http
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public static Task<T> MyPostJsonAsync<T>(this HttpClient httpClient, string requestUri, object content)
+        public static Task<T> PostJsonAsync<T>(this HttpClient httpClient, string requestUri, object content)
             => httpClient.SendJsonAsync<T>(HttpMethod.Post, requestUri, content);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace BlazorExtensions.Http
         /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
-        public static Task MyPutJsonAsync(this HttpClient httpClient, string requestUri, object content)
+        public static Task PutJsonAsync(this HttpClient httpClient, string requestUri, object content)
             => httpClient.SendJsonAsync(HttpMethod.Put, requestUri, content);
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace BlazorExtensions.Http
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public static Task<T> MyPutJsonAsync<T>(this HttpClient httpClient, string requestUri, object content)
+        public static Task<T> PutJsonAsync<T>(this HttpClient httpClient, string requestUri, object content)
             => httpClient.SendJsonAsync<T>(HttpMethod.Put, requestUri, content);
 
         /// <summary>
@@ -78,8 +78,31 @@ namespace BlazorExtensions.Http
         /// <param name="method">The HTTP method.</param>
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
-        public static Task MySendJsonAsync(this HttpClient httpClient, HttpMethod method, string requestUri, object content)
+        public static Task SendJsonAsync(this HttpClient httpClient, HttpMethod method, string requestUri, object content)
             => httpClient.SendJsonAsync<IgnoreResponse>(method, requestUri, content);
+
+
+        /// <summary>
+        /// Sends an HTTP Post request to the specified URI, including the specified <paramref name="content"/>
+        /// in JSON-encoded format, and doed NOT parse the response body, just returns a string.
+        /// </summary>
+        /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
+        /// <param name="method">The HTTP method.</param>
+        /// <param name="requestUri">The URI that the request will be sent to.</param>
+        /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
+        /// <returns>The response parsed as an object of the generic type.</returns>
+        public static async Task<string> SendJsonAsyncRawResult(this HttpClient httpClient, HttpMethod httpMethod, string requestUri, object content)
+        {
+            var requestJson = JsonUtil.Serialize(content);
+            var response = await httpClient.SendAsync(new HttpRequestMessage(httpMethod, requestUri)
+            {
+                Content = new StringContent(requestJson, Encoding.UTF8, "application/json")
+            });
+
+            return await response.Content.ReadAsStringAsync();
+
+        }
+
 
         /// <summary>
         /// Sends an HTTP request to the specified URI, including the specified <paramref name="content"/>
@@ -91,7 +114,7 @@ namespace BlazorExtensions.Http
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public static async Task<T> MySendJsonAsync<T>(this HttpClient httpClient, HttpMethod method, string requestUri, object content)
+        public static async Task<T> SendJsonAsync<T>(this HttpClient httpClient, HttpMethod method, string requestUri, object content)
         {
             var requestJson = JsonUtil.Serialize(content);
             var response = await httpClient.SendAsync(new HttpRequestMessage(method, requestUri)
