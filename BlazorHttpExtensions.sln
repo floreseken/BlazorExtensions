@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27520.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorHttpExtensions", "BlazorHttpExtensions\BlazorHttpExtensions.csproj", "{5E8A16E4-21D1-4B34-94A5-D7D9A6A94535}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E8A16E4-21D1-4B34-94A5-D7D9A6A94535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8A16E4-21D1-4B34-94A5-D7D9A6A94535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8A16E4-21D1-4B34-94A5-D7D9A6A94535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8A16E4-21D1-4B34-94A5-D7D9A6A94535}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {817C7715-8EFF-43CD-BFC8-E723C172C5C7}
+	EndGlobalSection
+EndGlobal
