@@ -33,7 +33,7 @@ namespace BlazorExtensions.Http
         }
 
         /// <summary>
-        /// Sends a GET request to the specified URI, and parses the JSON response body
+        /// Sends a GET request to the specified URI with an Auhtorization bearer in the header, and parses the JSON response body
         /// to create an object of the generic type.
         /// </summary>
         /// <typeparam name="T">A type into which the response body can be JSON-deserialized.</typeparam>
