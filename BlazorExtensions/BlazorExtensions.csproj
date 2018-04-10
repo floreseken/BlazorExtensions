@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+<!--dotnet pack -c release-->
 <!-- dotnet nuget push  BlazorExtensions -k keyhere  -s https://api.nuget.org/v3/index.json -->
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
