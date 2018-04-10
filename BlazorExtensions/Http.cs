@@ -52,5 +52,30 @@ namespace BlazorExtensions.Http
 
         }
 
+        /// <summary>
+        /// Sends a POST request with the content as json to the specified URI with an Auhtorization bearer in the header, and parses the JSON response body
+        /// to create an object of the generic type.
+        /// </summary>
+        /// <typeparam name="T">A type into which the response body can be JSON-deserialized.</typeparam>
+        /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
+        /// <param name="requestUri">The URI that the request will be sent to.</param>
+        /// <param name="content">Object to be send with the request, will be json serialized.</param>
+        /// <param name="bearer">Value to be added to the Authorization header as bearer.</param>
+        /// <returns>The response parsed as an object of the generic type.</returns>
+        public static async Task<T> PostJsonAsync<T>(this HttpClient httpClient, string requestUri, object content, string bearer)
+        {
+            var requestJson = JsonUtil.Serialize(content);
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, requestUri);
+            req.Headers.Add("Authorization", $"bearer {bearer}");
+            req.Content = new StringContent(requestJson, Encoding.UTF8, "application/json");
+
+            var test = await httpClient.SendAsync(req);
+
+            return JsonUtil.Deserialize<T>(await test.Content.ReadAsStringAsync());
+
+        }
+
+
+
     }
 }

@@ -19,6 +19,10 @@ Sends an HTTP Post request to the specified URI, including the specified content
        Sends a GET request to the specified URI with an Auhtorization bearer in the header, and parses the JSON response body to create an object of the generic type.
 
 
+```async Task<T> PostJsonAsync<T>(this HttpClient httpClient, string requestUri, object content, string bearer) ```<br/>
+       Sends a POST request to the specified URI with an Auhtorization bearer in the header and the content object as JSON, and parses the JSON response body to create an object of the generic type.
+
+
 To enable the browser methods please modify your app.cshtml like this:
 
 ```
@@ -28,3 +32,6 @@ To enable the browser methods please modify your app.cshtml like this:
 
 <BlazorExtensionScripts></BlazorExtensionScripts>
 ```
+
+# Known issues
+There is a timing issue when using browser extensions from the oninit of your startpage. That does not work.

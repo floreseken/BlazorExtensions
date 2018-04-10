@@ -1,16 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 <!-- dotnet nuget push  BlazorExtensions -k keyhere  -s https://api.nuget.org/v3/index.json -->
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.1.13</Version>
+    <Version>0.1.14</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Flores Eken</Authors>
     <Description>Usefull methods for working with blazor</Description>
     <PackageProjectUrl>http://github.com/floreseken/BlazorExtensions</PackageProjectUrl>
     <RepositoryUrl>http://github.com/floreseken/BlazorExtensions</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
-    <AssemblyVersion>0.1.13</AssemblyVersion>
-    <FileVersion>0.1.13</FileVersion>
+    <AssemblyVersion>0.1.14</AssemblyVersion>
+    <FileVersion>0.1.14</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
