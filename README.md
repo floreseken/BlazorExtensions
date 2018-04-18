@@ -1,7 +1,7 @@
 # BlazorExtensions
 **Usefull extensions for working with blazor**
 
-*Things I needed myself when expirimenting with Blazor 0.2 preview, will probably become obsolete in newer versions.*
+*Things I needed myself when experimenting with Blazor 0.2 preview, will probably become obsolete in newer versions.*
 
 <br/><br/>
 
