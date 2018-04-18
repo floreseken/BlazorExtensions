@@ -3,6 +3,8 @@
 
 *Things I needed myself when experimenting with Blazor 0.2 preview, will probably become obsolete in newer versions.*
 
+Available on nuget.
+
 <br/><br/>
 
 Available methods:
