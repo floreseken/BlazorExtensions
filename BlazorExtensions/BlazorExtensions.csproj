@@ -3,15 +3,15 @@
 <!-- dotnet nuget push  BlazorExtensions -k keyhere  -s https://api.nuget.org/v3/index.json -->
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.1.14</Version>
+    <Version>0.2.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Flores Eken</Authors>
     <Description>Usefull methods for working with blazor</Description>
     <PackageProjectUrl>http://github.com/floreseken/BlazorExtensions</PackageProjectUrl>
     <RepositoryUrl>http://github.com/floreseken/BlazorExtensions</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
-    <AssemblyVersion>0.1.14</AssemblyVersion>
-    <FileVersion>0.1.14</FileVersion>
+    <AssemblyVersion>0.2.0</AssemblyVersion>
+    <FileVersion>0.2.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -23,8 +23,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="0.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.1.0" />
+    <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
+    <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="content\JavaScript.js" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="0.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.0" />
   </ItemGroup>
 
 </Project>

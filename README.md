@@ -5,11 +5,16 @@
 
 <br/><br/>
 
-There are currently 3 methods:
+Available methods:
 
 ```void Browser.Alert(string message);```<br/>
  Trigger a browser alert('messsage') with your text.
 
+```string Browser.ReadStorage(string key)```<br/>
+Reads a value from the browser localstorage
+
+```void Browser.WriteStorage(string key, string value)```<br/>
+ Writes a value to the browser localstorage
 
 
 ```async Task<string> SendJsonAsyncRawResult(this HttpClient httpClient, HttpMethod httpMethod, string requestUri, object content)```<br/>
@@ -21,17 +26,3 @@ Sends an HTTP Post request to the specified URI, including the specified content
 
 ```async Task<T> PostJsonAsync<T>(this HttpClient httpClient, string requestUri, object content, string bearer) ```<br/>
        Sends a POST request to the specified URI with an Auhtorization bearer in the header and the content object as JSON, and parses the JSON response body to create an object of the generic type.
-
-
-To enable the browser methods please modify your app.cshtml like this:
-
-```
-@addTagHelper *, BlazorExtensions
-
-<Router AppAssembly=typeof(Program).Assembly />
-
-<BlazorExtensionScripts></BlazorExtensionScripts>
-```
-
-# Known issues
-There is a timing issue when using browser extensions from the oninit of your startpage. That does not work.
