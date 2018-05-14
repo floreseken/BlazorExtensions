@@ -3,7 +3,7 @@
 <!-- dotnet nuget push  BlazorExtensions -k keyhere  -s https://api.nuget.org/v3/index.json -->
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Flores Eken</Authors>
     <Description>Usefull methods for working with blazor</Description>
@@ -11,7 +11,7 @@
     <RepositoryUrl>http://github.com/floreseken/BlazorExtensions</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <AssemblyVersion>0.2.0</AssemblyVersion>
-    <FileVersion>0.2.0</FileVersion>
+    <FileVersion>0.3.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -29,13 +29,10 @@
     <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="content\JavaScript.js" />
-  </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="0.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="0.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.3.0" />
   </ItemGroup>
 
 </Project>
