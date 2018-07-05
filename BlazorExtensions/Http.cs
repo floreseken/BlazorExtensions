@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Blazor;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace BlazorExtensions.Http
         /// <summary>
         /// Sends a GET request to the specified URI with an Auhtorization bearer in the header, and parses the JSON response body
         /// to create an object of the generic type.
+        /// Will throw UnauthorizedAccessException Exception on 401 response.
         /// </summary>
         /// <typeparam name="T">A type into which the response body can be JSON-deserialized.</typeparam>
         /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
@@ -46,15 +48,19 @@ namespace BlazorExtensions.Http
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, requestUri);
             req.Headers.Add("Authorization", $"bearer {bearer}");
 
-            var test = await httpClient.SendAsync(req);
+            var response = await httpClient.SendAsync(req);
 
-            return JsonUtil.Deserialize<T>(await test.Content.ReadAsStringAsync());
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                throw new UnauthorizedAccessException();
+
+            return JsonUtil.Deserialize<T>(await response.Content.ReadAsStringAsync());
 
         }
 
         /// <summary>
         /// Sends a POST request with the content as json to the specified URI with an Auhtorization bearer in the header, and parses the JSON response body
         /// to create an object of the generic type.
+        /// Will throw UnauthorizedAccessException Exception on 401 response.
         /// </summary>
         /// <typeparam name="T">A type into which the response body can be JSON-deserialized.</typeparam>
         /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
@@ -69,9 +75,12 @@ namespace BlazorExtensions.Http
             req.Headers.Add("Authorization", $"bearer {bearer}");
             req.Content = new StringContent(requestJson, Encoding.UTF8, "application/json");
 
-            var test = await httpClient.SendAsync(req);
+            var response = await httpClient.SendAsync(req);
 
-            return JsonUtil.Deserialize<T>(await test.Content.ReadAsStringAsync());
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                throw new UnauthorizedAccessException();
+
+            return JsonUtil.Deserialize<T>(await response.Content.ReadAsStringAsync());
 
         }
 
