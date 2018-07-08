@@ -37,5 +37,15 @@ namespace BlazorExtensions
             RegisteredFunction.Invoke<object>("BlazorExtensions.WriteStorage", key, value);
         }
 
+        /// <summary>
+        /// Write a cookie.
+        /// </summary>
+        /// <param name="name">name of cookie</param>
+        /// <param name="value">Value to store</param>
+        /// <param name="days">Number of days to be valid</param>
+        public static void WriteCookie(string name, string value, int days)
+        {
+            RegisteredFunction.Invoke<object>("BlazorExtensions.WriteCookie", name, value, days);
+        }
     }
 }
