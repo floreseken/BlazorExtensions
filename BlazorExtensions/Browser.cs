@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Blazor.Browser.Interop;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.JSInterop;
+using System.Threading.Tasks;
 
 namespace BlazorExtensions
 {
@@ -11,20 +9,18 @@ namespace BlazorExtensions
         /// Trigger a browser alert('messsage') with your text.
         /// </summary>
         /// <param name="message">The message to display</param>
-        public static void Alert(string message)
+        public async static Task AlertAsync(string message)
         {
-
-            RegisteredFunction.Invoke<object>("BlazorExtensions.Alert", message);
-
+            var test = await JSRuntime.Current.InvokeAsync<object>("blazorExtensions.Alert", message);
         }
 
         /// <summary>
         /// Read a value from the browers localStorage.
         /// </summary>
         /// <param name="key">Key to read</param>
-        public static string ReadStorage(string key)
+        public async static Task<string> ReadStorageAsync(string key)
         {
-            return RegisteredFunction.Invoke<string>("BlazorExtensions.ReadStorage", key);
+            return await JSRuntime.Current.InvokeAsync<string>("blazorExtensions.ReadStorage", key);
         }
 
         /// <summary>
@@ -32,9 +28,9 @@ namespace BlazorExtensions
         /// </summary>
         /// <param name="key">Key to write</param>
         /// <param name="value">Value to store</param>
-        public static void WriteStorage(string key, string value)
+        public async static Task WriteStorageAsync(string key, string value)
         {
-            RegisteredFunction.Invoke<object>("BlazorExtensions.WriteStorage", key, value);
+            var test = await JSRuntime.Current.InvokeAsync<object>("blazorExtensions.WriteStorage", key, value);
         }
 
         /// <summary>
@@ -43,9 +39,9 @@ namespace BlazorExtensions
         /// <param name="name">name of cookie</param>
         /// <param name="value">Value to store</param>
         /// <param name="days">Number of days to be valid</param>
-        public static void WriteCookie(string name, string value, int days)
+        public async static Task WriteCookieAsync(string name, string value, int days)
         {
-            RegisteredFunction.Invoke<object>("BlazorExtensions.WriteCookie", name, value, days);
+            var test = await JSRuntime.Current.InvokeAsync<object>("blazorExtensions.WriteCookie", name, value, days);
         }
     }
 }

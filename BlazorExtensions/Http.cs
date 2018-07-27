@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.JSInterop;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -23,7 +23,7 @@ namespace BlazorExtensions.Http
         /// <returns>The response as a string (unparsed)</returns>
         public static async Task<string> SendJsonAsyncRawResult(this HttpClient httpClient, HttpMethod httpMethod, string requestUri, object content)
         {
-            var requestJson = JsonUtil.Serialize(content);
+            var requestJson = Json.Serialize(content);
             var response = await httpClient.SendAsync(new HttpRequestMessage(httpMethod, requestUri)
             {
                 Content = new StringContent(requestJson, Encoding.UTF8, "application/json")
@@ -53,7 +53,7 @@ namespace BlazorExtensions.Http
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 throw new UnauthorizedAccessException();
 
-            return JsonUtil.Deserialize<T>(await response.Content.ReadAsStringAsync());
+            return Json.Deserialize<T>(await response.Content.ReadAsStringAsync());
 
         }
 
@@ -70,7 +70,7 @@ namespace BlazorExtensions.Http
         /// <returns>The response parsed as an object of the generic type.</returns>
         public static async Task<T> PostJsonAsync<T>(this HttpClient httpClient, string requestUri, object content, string bearer)
         {
-            var requestJson = JsonUtil.Serialize(content);
+            var requestJson = Json.Serialize(content);
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, requestUri);
             req.Headers.Add("Authorization", $"bearer {bearer}");
             req.Content = new StringContent(requestJson, Encoding.UTF8, "application/json");
@@ -80,7 +80,7 @@ namespace BlazorExtensions.Http
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 throw new UnauthorizedAccessException();
 
-            return JsonUtil.Deserialize<T>(await response.Content.ReadAsStringAsync());
+            return Json.Deserialize<T>(await response.Content.ReadAsStringAsync());
 
         }
 
